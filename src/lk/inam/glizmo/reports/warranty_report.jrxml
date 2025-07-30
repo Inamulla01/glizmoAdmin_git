@@ -1,0 +1,449 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.21.3.final using JasperReports Library version 6.21.3-4a3078d20785ebe464f18037d738d12fc98c13cf  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="warranty_report" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e88e4d81-6655-44b5-b5c7-8ef4f83c6578">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Glizmo_dbms.jrdax"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<queryString>
+		<![CDATA[SELECT * FROM  `view_user_warranty_details`;]]>
+	</queryString>
+	<field name="warranty_id" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="warranty_id"/>
+		<property name="com.jaspersoft.studio.field.label" value="warranty_id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="view_user_warranty_details"/>
+	</field>
+	<field name="warranty_start" class="java.time.LocalDateTime">
+		<property name="com.jaspersoft.studio.field.name" value="warranty_start"/>
+		<property name="com.jaspersoft.studio.field.label" value="warranty_start"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="view_user_warranty_details"/>
+	</field>
+	<field name="warranty_end" class="java.time.LocalDateTime">
+		<property name="com.jaspersoft.studio.field.name" value="warranty_end"/>
+		<property name="com.jaspersoft.studio.field.label" value="warranty_end"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="view_user_warranty_details"/>
+	</field>
+	<field name="claim_description" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="claim_description"/>
+		<property name="com.jaspersoft.studio.field.label" value="claim_description"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="view_user_warranty_details"/>
+	</field>
+	<field name="claim_date" class="java.time.LocalDateTime">
+		<property name="com.jaspersoft.studio.field.name" value="claim_date"/>
+		<property name="com.jaspersoft.studio.field.label" value="claim_date"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="view_user_warranty_details"/>
+	</field>
+	<field name="product_id" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="product_id"/>
+		<property name="com.jaspersoft.studio.field.label" value="product_id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="view_user_warranty_details"/>
+	</field>
+	<field name="product_name" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="product_name"/>
+		<property name="com.jaspersoft.studio.field.label" value="product_name"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="view_user_warranty_details"/>
+	</field>
+	<field name="product_description" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="product_description"/>
+		<property name="com.jaspersoft.studio.field.label" value="product_description"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="view_user_warranty_details"/>
+	</field>
+	<field name="product_status" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="product_status"/>
+		<property name="com.jaspersoft.studio.field.label" value="product_status"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="view_user_warranty_details"/>
+	</field>
+	<field name="warranty_period" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="warranty_period"/>
+		<property name="com.jaspersoft.studio.field.label" value="warranty_period"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="view_user_warranty_details"/>
+	</field>
+	<field name="order_id" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="order_id"/>
+		<property name="com.jaspersoft.studio.field.label" value="order_id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="view_user_warranty_details"/>
+	</field>
+	<field name="order_date_time" class="java.time.LocalDateTime">
+		<property name="com.jaspersoft.studio.field.name" value="order_date_time"/>
+		<property name="com.jaspersoft.studio.field.label" value="order_date_time"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="view_user_warranty_details"/>
+	</field>
+	<field name="total_amount" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.name" value="total_amount"/>
+		<property name="com.jaspersoft.studio.field.label" value="total_amount"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="view_user_warranty_details"/>
+	</field>
+	<field name="order_status_id" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="order_status_id"/>
+		<property name="com.jaspersoft.studio.field.label" value="order_status_id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="view_user_warranty_details"/>
+	</field>
+	<field name="users_id" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="users_id"/>
+		<property name="com.jaspersoft.studio.field.label" value="users_id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="view_user_warranty_details"/>
+	</field>
+	<field name="fname" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="fname"/>
+		<property name="com.jaspersoft.studio.field.label" value="fname"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="view_user_warranty_details"/>
+	</field>
+	<field name="lname" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="lname"/>
+		<property name="com.jaspersoft.studio.field.label" value="lname"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="view_user_warranty_details"/>
+	</field>
+	<field name="email" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="email"/>
+		<property name="com.jaspersoft.studio.field.label" value="email"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="view_user_warranty_details"/>
+	</field>
+	<field name="contact" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="contact"/>
+		<property name="com.jaspersoft.studio.field.label" value="contact"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="view_user_warranty_details"/>
+	</field>
+	<field name="status_type" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="status_type"/>
+		<property name="com.jaspersoft.studio.field.label" value="status_type"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="view_user_warranty_details"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="33" splitType="Stretch">
+			<staticText>
+				<reportElement x="87" y="0" width="380" height="30" uuid="e1b0addc-3e6c-4991-b9eb-7b1ac1ae8b83"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial Black" size="21"/>
+				</textElement>
+				<text><![CDATA[Warranty Report]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="8" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="30" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="-11" y="0" width="30" height="30" backcolor="#C9C9C9" uuid="bb255de3-7d4b-4ef5-b790-2087a78be5be">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="9d293f86-3bdc-4801-910a-73a9b3ef2293"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Bahnschrift" size="11"/>
+				</textElement>
+				<text><![CDATA[ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="19" y="0" width="60" height="30" backcolor="#C9C9C9" uuid="449d6f3e-cb59-4e84-9074-9767584d0087">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="8ee01fca-bba4-4a0a-b964-de0dcf3d007b"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Bahnschrift" size="11"/>
+				</textElement>
+				<text><![CDATA[Product ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="79" y="0" width="70" height="30" backcolor="#C9C9C9" uuid="158d1a70-8064-4573-a712-1438b2b26966">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="5c395a5e-2256-4994-aa5e-3dd4ffd505f3"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Bahnschrift" size="11"/>
+				</textElement>
+				<text><![CDATA[Product Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="149" y="0" width="60" height="30" backcolor="#C9C9C9" uuid="334a7c1e-6d6c-4829-b7fb-a681efad6092">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="1936ac5e-038e-46f6-bac6-c8fa442c1c42"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Bahnschrift" size="11"/>
+				</textElement>
+				<text><![CDATA[Warranty Start]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="209" y="0" width="70" height="30" backcolor="#C9C9C9" uuid="77617f24-5710-4f76-b5dd-25dbeb4db510">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="8da3f3bb-c804-49b6-90bc-bf2bab964c5e"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Bahnschrift" size="11"/>
+				</textElement>
+				<text><![CDATA[Warranty End]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="279" y="0" width="70" height="30" backcolor="#C9C9C9" uuid="4d683858-9faa-4c30-8c13-2cb81b681c2c">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="1e80c80f-0bc9-45ed-bfa9-09d506b01b2c"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Bahnschrift" size="11"/>
+				</textElement>
+				<text><![CDATA[Claim Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="349" y="0" width="46" height="30" backcolor="#C9C9C9" uuid="707ff28c-cca6-438d-b064-b1837a419df4">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="6f34352a-6241-4ea0-8159-4ac2c3e00639"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Bahnschrift" size="11"/>
+				</textElement>
+				<text><![CDATA[User ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="395" y="0" width="64" height="30" backcolor="#C9C9C9" uuid="b99f3ac5-d858-4d33-b048-1e116eaadd30">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="704783b7-c61f-4513-94c6-322966776546"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Bahnschrift" size="11"/>
+				</textElement>
+				<text><![CDATA[Email]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="459" y="0" width="60" height="30" backcolor="#C9C9C9" uuid="c2fc6326-b71f-4afc-b6c3-070e87b92213">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d4a499d1-c23d-4505-84e5-88a5130f2b61"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Bahnschrift" size="11"/>
+				</textElement>
+				<text><![CDATA[Order ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="519" y="0" width="50" height="30" backcolor="#C9C9C9" uuid="ed5b317b-3ef3-40a8-9ac0-707641bf9a5a">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="41d9e725-2125-457e-9179-41b37ebf05d3"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Bahnschrift" size="11"/>
+				</textElement>
+				<text><![CDATA[Status]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<textField>
+				<reportElement x="-11" y="0" width="30" height="30" uuid="3b999c9d-9487-487f-b7c8-1e06cb1f87fd">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="9d293f86-3bdc-4801-910a-73a9b3ef2293"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Bahnschrift" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{warranty_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="19" y="0" width="60" height="30" uuid="f27323f1-a995-408f-8842-d95fe0aa02f3">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="8ee01fca-bba4-4a0a-b964-de0dcf3d007b"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Bahnschrift" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{product_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="79" y="0" width="70" height="30" uuid="5bd9b3f8-4bcc-4d50-a60a-e21294e570fa">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="5c395a5e-2256-4994-aa5e-3dd4ffd505f3"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Bahnschrift" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{product_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="149" y="0" width="60" height="30" uuid="dc47c113-73ce-4d25-ad5c-6baf959097f1">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="1936ac5e-038e-46f6-bac6-c8fa442c1c42"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Bahnschrift" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{warranty_start}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="209" y="0" width="70" height="30" uuid="bfaeb5ab-30d9-4af8-8823-63e217392dac">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="8da3f3bb-c804-49b6-90bc-bf2bab964c5e"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Bahnschrift" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{warranty_end}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="279" y="0" width="70" height="30" uuid="814a08b4-d173-4d0b-8d59-913545b3208e">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="1e80c80f-0bc9-45ed-bfa9-09d506b01b2c"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Bahnschrift" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{claim_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="349" y="0" width="46" height="30" uuid="27812e02-c3ef-4371-a347-b7df44835740">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="6f34352a-6241-4ea0-8159-4ac2c3e00639"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Bahnschrift" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{users_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="395" y="0" width="64" height="30" uuid="b3ade386-bf01-40ba-b2a7-b6cc235afb46">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="704783b7-c61f-4513-94c6-322966776546"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Bahnschrift" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{email}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="459" y="0" width="60" height="30" uuid="86461543-f81e-4c18-8ad2-fc76ed8b51ea">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d4a499d1-c23d-4505-84e5-88a5130f2b61"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Bahnschrift" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{order_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="519" y="0" width="50" height="30" uuid="b3843bdd-42d2-474f-b3f8-304a64272b4b">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="41d9e725-2125-457e-9179-41b37ebf05d3"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Bahnschrift" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{status_type}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
