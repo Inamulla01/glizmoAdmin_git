@@ -5,6 +5,7 @@
 package lk.inam.glizmo.dialog.panel;
 
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
@@ -27,6 +28,7 @@ public class ProductImgPanel extends javax.swing.JPanel {
      */
     public ProductImgPanel() {
         initComponents();
+        imageLoadingPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 10));
     }
 
     /**
@@ -91,38 +93,54 @@ public class ProductImgPanel extends javax.swing.JPanel {
 
     private void controlBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_controlBtnActionPerformed
         JFileChooser chooser = new JFileChooser();
-        FileNameExtensionFilter filter = new FileNameExtensionFilter("Images (.png, .jpeg, .jpg)",
-                "png", "jpeg", "jpg");
+        chooser.setMultiSelectionEnabled(true); // allow multiple images
+        FileNameExtensionFilter filter = new FileNameExtensionFilter(
+                "Images (.png, .jpeg, .jpg)", "png", "jpeg", "jpg");
         chooser.setFileFilter(filter);
+
         int option = chooser.showOpenDialog(imageLoadingPanel);
         if (option == JFileChooser.APPROVE_OPTION) {
-            File selectedFile = chooser.getSelectedFile();
-            try {
-                File imageFolder = new File("product_images");
-                if (!imageFolder.exists()) {
-                    imageFolder.mkdir();
+            File[] selectedFiles = chooser.getSelectedFiles();
+
+            for (File selectedFile : selectedFiles) {
+                try {
+                    File imageFolder = new File("product_images");
+                    if (!imageFolder.exists()) {
+                        imageFolder.mkdir();
+                    }
+
+                    String fileName = System.currentTimeMillis() + "_" + selectedFile.getName();
+                    File destinationFile = new File(imageFolder, fileName);
+                    prImagePathInput.setText(destinationFile.getAbsolutePath());
+
+                    Files.copy(selectedFile.toPath(),
+                            destinationFile.toPath(),
+                            StandardCopyOption.REPLACE_EXISTING);
+
+                    showImage(destinationFile);
+
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
-                String fileName = System.currentTimeMillis() + "_" + selectedFile.getName();
-                File destinationFile = new File(imageFolder, fileName);
-                prImagePathInput.setText(destinationFile.getAbsolutePath());
-                Files.copy(selectedFile.toPath(),
-                        destinationFile.toPath(),
-                        StandardCopyOption.REPLACE_EXISTING);
-                showImage(destinationFile);
-            } catch (IOException e) {
-                e.printStackTrace();
             }
         }
     }//GEN-LAST:event_controlBtnActionPerformed
     private void showImage(File imageFile) {
         ProductImg productImage = new ProductImg();
         productImage.setPreferredSize(new Dimension(140, 180));
+
         ImageIcon icon = new ImageIcon(imageFile.getAbsolutePath());
-        Image image = icon.getImage().getScaledInstance(productImage.getPreferredSize().width,
-                productImage.getPreferredSize().height, Image.SCALE_SMOOTH);
+        Image image = icon.getImage().getScaledInstance(
+                productImage.getPreferredSize().width,
+                productImage.getPreferredSize().height,
+                Image.SCALE_SMOOTH
+        );
+
         boolean isSet = productImage.setProductImage(new ImageIcon(image));
         if (isSet) {
             imageLoadingPanel.add(productImage);
+            imageLoadingPanel.revalidate();
+            imageLoadingPanel.repaint();
             SwingUtilities.updateComponentTreeUI(imageLoadingPanel);
         }
     }
