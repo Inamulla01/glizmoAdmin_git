@@ -8,10 +8,12 @@ import com.formdev.flatlaf.extras.FlatSVGIcon;
 import connection.MySQL;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.HeadlessException;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.util.Vector;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.HashMap;
 import javax.swing.AbstractCellEditor;
 import javax.swing.DefaultCellEditor;
@@ -25,6 +27,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
+import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.view.JasperViewer;
@@ -72,8 +75,8 @@ public class UsersPanel extends javax.swing.JPanel {
                         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
             centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
             userTable.setDefaultRenderer(Object.class, centerRenderer);
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
+             JOptionPane.showMessageDialog(this, "Database error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -203,8 +206,7 @@ public class UsersPanel extends javax.swing.JPanel {
             JasperPrint fillReport = JasperFillManager.fillReport(filePath, parameters, connection);
             JasperViewer.viewReport(fillReport, false);
 
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (HeadlessException | JRException e) {
             JOptionPane.showMessageDialog(this, "Error generating report:\n" + e.getMessage(),
                     "Report Error", JOptionPane.ERROR_MESSAGE);
         }

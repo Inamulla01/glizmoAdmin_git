@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.Vector;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
@@ -52,7 +53,7 @@ public class ProductInfo extends javax.swing.JPanel {
             DefaultComboBoxModel dcm = new DefaultComboBoxModel(categories);
             productCategory.setModel(dcm);
         } catch (SQLException e) {
-            e.printStackTrace();
+             JOptionPane.showMessageDialog(this, "Database error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -70,7 +71,7 @@ public class ProductInfo extends javax.swing.JPanel {
             DefaultComboBoxModel dcm = new DefaultComboBoxModel(brands);
             productBrand.setModel(dcm);
         } catch (SQLException e) {
-            e.printStackTrace();
+             JOptionPane.showMessageDialog(this, "Database error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -88,7 +89,7 @@ public class ProductInfo extends javax.swing.JPanel {
             DefaultComboBoxModel dcm = new DefaultComboBoxModel(models);
             productModel.setModel(dcm);
         } catch (SQLException e) {
-            e.printStackTrace();
+             JOptionPane.showMessageDialog(this, "Database error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
         private void loadColour() {
@@ -105,7 +106,7 @@ public class ProductInfo extends javax.swing.JPanel {
             DefaultComboBoxModel dcm = new DefaultComboBoxModel(colours);
             productColour.setModel(dcm);
         } catch (SQLException e) {
-            e.printStackTrace();
+             JOptionPane.showMessageDialog(this, "Database error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
     public JTextField getPrNameInput() {

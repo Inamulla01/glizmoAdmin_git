@@ -10,6 +10,7 @@ import java.sql.Connection;
 import connection.MySQL;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.HeadlessException;
 import java.io.InputStream;
 import java.sql.ResultSet;
 import java.util.HashMap;
@@ -358,8 +359,7 @@ public class ProductPanel extends javax.swing.JPanel {
             JasperPrint fillReport = JasperFillManager.fillReport(filePath, parameters, connection);
             JasperViewer.viewReport(fillReport, false);
 
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (HeadlessException | JRException e) {
             JOptionPane.showMessageDialog(this, "Error generating report:\n" + e.getMessage(),
                     "Report Error", JOptionPane.ERROR_MESSAGE);
         }

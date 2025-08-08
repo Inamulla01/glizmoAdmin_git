@@ -7,9 +7,11 @@ package lk.inam.glizmo.panel;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import connection.MySQL;
 import java.awt.Color;
+import java.awt.HeadlessException;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Vector;
 import javax.swing.JOptionPane;
@@ -17,6 +19,7 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
+import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.view.JasperViewer;
@@ -57,8 +60,8 @@ public class OrderPanel extends javax.swing.JPanel {
             DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
             centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
             orderTable.setDefaultRenderer(Object.class, centerRenderer);
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
+             JOptionPane.showMessageDialog(this, "Database error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -98,8 +101,8 @@ public class OrderPanel extends javax.swing.JPanel {
             DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
             centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
             orderTable.setDefaultRenderer(Object.class, centerRenderer);
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, "Database error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -288,8 +291,8 @@ public class OrderPanel extends javax.swing.JPanel {
             JasperPrint fillReport = JasperFillManager.fillReport(filePath, parameters, connection);
             JasperViewer.viewReport(fillReport, false);
 
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (HeadlessException | JRException e) {
+             JOptionPane.showMessageDialog(this, "Database error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             JOptionPane.showMessageDialog(this, "Error generating report:\n" + e.getMessage(),
                     "Report Error", JOptionPane.ERROR_MESSAGE);
         }

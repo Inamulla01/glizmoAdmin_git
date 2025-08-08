@@ -41,7 +41,7 @@ public class LoginScreen extends javax.swing.JFrame {
             loginImagePanel.setIcon(loginImage);
 
         } catch (Exception e) {
-            e.printStackTrace();
+             JOptionPane.showMessageDialog(this, "Database error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
 
     }

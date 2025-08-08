@@ -8,6 +8,7 @@ import com.formdev.flatlaf.FlatIntelliJLaf;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import connection.MySQL;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import lk.inam.glizmo.session.Session;
 import lk.inam.glizmo.velidation.Validater;
@@ -37,8 +38,8 @@ public class ProfileDialog extends javax.swing.JDialog {
                 name.setText(rs.getString("name"));
                 password.setText(rs.getString("password"));
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
+          
             JOptionPane.showMessageDialog(this, "Failed to load profile: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
 

@@ -47,7 +47,7 @@ public class AddStockDialog extends javax.swing.JDialog {
             DefaultComboBoxModel dcm = new DefaultComboBoxModel(products);
             productsID.setModel(dcm);
         } catch (SQLException e) {
-            e.printStackTrace();
+             JOptionPane.showMessageDialog(this, "Database error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 

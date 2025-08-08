@@ -249,7 +249,10 @@ public class AddProductDialog extends javax.swing.JDialog {
                 this.dispose();
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null,
+                        "Something Want wrong",
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE);
         }
     }
 

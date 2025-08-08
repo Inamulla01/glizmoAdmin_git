@@ -10,6 +10,7 @@ import java.awt.Color;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Vector;
 import javax.swing.JFrame;
@@ -66,8 +67,8 @@ public class WarrantiesPanel extends javax.swing.JPanel {
             DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
             centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
             warrantyTable.setDefaultRenderer(Object.class, centerRenderer);
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
+             JOptionPane.showMessageDialog(this, "Database error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 

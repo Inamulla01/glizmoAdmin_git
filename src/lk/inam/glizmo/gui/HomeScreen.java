@@ -10,9 +10,11 @@ import com.formdev.flatlaf.extras.FlatSVGIcon;
 import connection.MySQL;
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.HashMap;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -56,8 +58,8 @@ public class HomeScreen extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(this, "No admin found with email: " + loggedInEmail, "Warning", JOptionPane.WARNING_MESSAGE);
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (HeadlessException | SQLException e) {
+            
             JOptionPane.showMessageDialog(this, "Database error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
         init();

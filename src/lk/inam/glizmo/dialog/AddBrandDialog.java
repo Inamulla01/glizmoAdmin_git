@@ -6,7 +6,9 @@ package lk.inam.glizmo.dialog;
 
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import connection.MySQL;
+import java.awt.HeadlessException;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import lk.inam.glizmo.velidation.Validater;
 
@@ -139,8 +141,8 @@ public class AddBrandDialog extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(this, "Brand added successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
             }
 
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (HeadlessException | SQLException e) {
+            
             JOptionPane.showMessageDialog(this, "Database error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
 

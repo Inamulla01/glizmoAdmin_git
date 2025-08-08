@@ -19,6 +19,7 @@ import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.data.general.DefaultPieDataset;
 import java.sql.SQLException;
+import javax.swing.JOptionPane;
 import org.jfree.data.category.DefaultCategoryDataset;
 
 /**
@@ -44,12 +45,15 @@ public class DashboardPanel extends javax.swing.JPanel {
         totalStock();
         totalProduct();
         totalUser();
+        
+        
         MonthlyStockChart stockChartPanel = new MonthlyStockChart();
         chart.setLayout(new BorderLayout());
         chart.removeAll();
         chart.add(stockChartPanel, BorderLayout.CENTER);
         chart.revalidate();
         chart.repaint();
+        
         MonthlySalesPieChart chart = new MonthlySalesPieChart();
         chart1.setLayout(new BorderLayout());
         chart1.removeAll();
@@ -74,7 +78,10 @@ public class DashboardPanel extends javax.swing.JPanel {
                     dataset.setValue(getMonthName(month), total);
                 }
             } catch (SQLException e) {
-                e.printStackTrace();
+                            JOptionPane.showMessageDialog(null,
+                        "Something Want wrong",
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE);
             }
 
             JFreeChart pieChart = ChartFactory.createPieChart(
@@ -144,13 +151,16 @@ public class DashboardPanel extends javax.swing.JPanel {
                 }
 
             } catch (SQLException e) {
-                e.printStackTrace();
+                            JOptionPane.showMessageDialog(null,
+                        "Something Want wrong",
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE);
             }
 
             JFreeChart chart = ChartFactory.createPieChart(
-                    "Monthly Delivered Orders", // Chart title
+                    "Monthly Delivered Orders",
                     dataset,
-                    true, // legend
+                    true ,
                     true,
                     false
             );
@@ -202,8 +212,11 @@ public class DashboardPanel extends javax.swing.JPanel {
                 todayErn.setText("Rs. 00");
             }
 
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
+                        JOptionPane.showMessageDialog(null,
+                        "Something Want wrong",
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -218,8 +231,11 @@ public class DashboardPanel extends javax.swing.JPanel {
                 weekErn.setText("Rs. 00");
             }
 
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
+                        JOptionPane.showMessageDialog(null,
+                        "Something Want wrong",
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -236,8 +252,11 @@ public class DashboardPanel extends javax.swing.JPanel {
                 monthErn.setText("Rs. 00");
             }
 
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
+                        JOptionPane.showMessageDialog(null,
+                        "Something Want wrong",
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -254,8 +273,11 @@ public class DashboardPanel extends javax.swing.JPanel {
                 todaySld.setText("0");
             }
 
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
+                        JOptionPane.showMessageDialog(null,
+                        "Something Want wrong",
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -272,8 +294,11 @@ public class DashboardPanel extends javax.swing.JPanel {
                 weekSld.setText("0");
             }
 
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
+                        JOptionPane.showMessageDialog(null,
+                        "Something Want wrong",
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -290,8 +315,11 @@ public class DashboardPanel extends javax.swing.JPanel {
                 monthSld.setText("0");
             }
 
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
+                        JOptionPane.showMessageDialog(null,
+                        "Something Want wrong",
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -306,8 +334,11 @@ public class DashboardPanel extends javax.swing.JPanel {
                 totalStock.setText("0");
             }
 
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
+                        JOptionPane.showMessageDialog(null,
+                        "Something Want wrong",
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -322,8 +353,11 @@ public class DashboardPanel extends javax.swing.JPanel {
                 totalProduct.setText("0");
             }
 
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null,
+                        "Something Want wrong",
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -338,8 +372,11 @@ public class DashboardPanel extends javax.swing.JPanel {
                 totalUser.setText("0");
             }
 
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
+                        JOptionPane.showMessageDialog(null,
+                        "Something Want wrong",
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -375,8 +412,11 @@ public class DashboardPanel extends javax.swing.JPanel {
             DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
             centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
             topUser.setDefaultRenderer(Object.class, centerRenderer);
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
+                        JOptionPane.showMessageDialog(null,
+                        "Something Want wrong",
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -415,8 +455,11 @@ public class DashboardPanel extends javax.swing.JPanel {
             DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
             centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
             topProduct.setDefaultRenderer(Object.class, centerRenderer);
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
+                        JOptionPane.showMessageDialog(null,
+                        "Something Want wrong",
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -424,16 +467,16 @@ public class DashboardPanel extends javax.swing.JPanel {
         FlatSVGIcon iconMonthSVG = new FlatSVGIcon("lk/inam/glizmo/img/monthly.svg", 50, 50);
         iconMonth.setIcon(iconMonthSVG);
 
-        FlatSVGIcon iconTodeySVG = new FlatSVGIcon("lk/inam/glizmo/img/Today.svg", 60, 60);
-        iconTodey.setIcon(iconTodeySVG);
+        FlatSVGIcon iconTodaySVG = new FlatSVGIcon("lk/inam/glizmo/img/today.svg", 60, 60);
+        iconToday.setIcon(iconTodaySVG);
 
         FlatSVGIcon iconWeekSVG = new FlatSVGIcon("lk/inam/glizmo/img/weekly.svg", 50, 50);
         iconWeek.setIcon(iconWeekSVG);
         FlatSVGIcon iconMonth1SVG = new FlatSVGIcon("lk/inam/glizmo/img/monthly.svg", 50, 50);
         iconMonth1.setIcon(iconMonth1SVG);
 
-        FlatSVGIcon iconTodey1SVG = new FlatSVGIcon("lk/inam/glizmo/img/Today.svg", 60, 60);
-        iconTodey1.setIcon(iconTodey1SVG);
+        FlatSVGIcon iconToday1SVG = new FlatSVGIcon("lk/inam/glizmo/img/today.svg", 60, 60);
+        iconToday1.setIcon(iconToday1SVG);
 
         FlatSVGIcon iconWeek1SVG = new FlatSVGIcon("lk/inam/glizmo/img/weekly.svg", 50, 50);
         iconWeek1.setIcon(iconWeek1SVG);
@@ -464,7 +507,7 @@ public class DashboardPanel extends javax.swing.JPanel {
         topProduct = new javax.swing.JTable();
         totalErnToday = new javax.swing.JPanel();
         todayErn = new javax.swing.JLabel();
-        iconTodey = new javax.swing.JLabel();
+        iconToday = new javax.swing.JLabel();
         totalErnWeek = new javax.swing.JPanel();
         weekErn = new javax.swing.JLabel();
         iconWeek = new javax.swing.JLabel();
@@ -473,7 +516,7 @@ public class DashboardPanel extends javax.swing.JPanel {
         iconMonth = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         todaySld = new javax.swing.JLabel();
-        iconTodey1 = new javax.swing.JLabel();
+        iconToday1 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         weekSld = new javax.swing.JLabel();
         iconWeek1 = new javax.swing.JLabel();
@@ -558,7 +601,7 @@ public class DashboardPanel extends javax.swing.JPanel {
             totalErnTodayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, totalErnTodayLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(iconTodey, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(iconToday, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(totalErnTodayLayout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addComponent(todayErn)
@@ -567,7 +610,7 @@ public class DashboardPanel extends javax.swing.JPanel {
         totalErnTodayLayout.setVerticalGroup(
             totalErnTodayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(totalErnTodayLayout.createSequentialGroup()
-                .addComponent(iconTodey, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(iconToday, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(todayErn)
                 .addGap(71, 71, 71))
@@ -642,7 +685,7 @@ public class DashboardPanel extends javax.swing.JPanel {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(iconTodey1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(iconToday1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addComponent(todaySld)
@@ -651,7 +694,7 @@ public class DashboardPanel extends javax.swing.JPanel {
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addComponent(iconTodey1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(iconToday1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(todaySld)
                 .addGap(71, 71, 71))
@@ -929,8 +972,8 @@ public class DashboardPanel extends javax.swing.JPanel {
     private javax.swing.JLabel iconMonth1;
     private javax.swing.JLabel iconProductCount;
     private javax.swing.JLabel iconStockCount;
-    private javax.swing.JLabel iconTodey;
-    private javax.swing.JLabel iconTodey1;
+    private javax.swing.JLabel iconToday;
+    private javax.swing.JLabel iconToday1;
     private javax.swing.JLabel iconUserCount;
     private javax.swing.JLabel iconWeek;
     private javax.swing.JLabel iconWeek1;
