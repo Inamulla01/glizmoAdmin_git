@@ -7,6 +7,7 @@ package lk.inam.glizmo.panel;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import connection.MySQL;
 import java.awt.Color;
+import java.awt.HeadlessException;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -52,7 +53,7 @@ public class StockPanel extends javax.swing.JPanel {
         tableHeader.setForeground(new java.awt.Color(3, 4, 94));
         tableHeader.setBackground(new java.awt.Color(173, 232, 244));
         try {
-            ResultSet rs = MySQL.executeSearch("SELECT * FROM `view_product`;");
+            ResultSet rs = MySQL.executeSearch("SELECT * FROM `view_stock`;");
             DefaultTableModel dtm = (DefaultTableModel) stockTable.getModel();
             dtm.setRowCount(0);
             int count = 0;
@@ -215,7 +216,7 @@ public class StockPanel extends javax.swing.JPanel {
 
     private void stockReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stockReportActionPerformed
  try {
-        InputStream filePath = getClass().getClassLoader().getResourceAsStream("lk/inam/glizmo/reports/stock_report.jasper");
+        InputStream filePath = getClass().getClassLoader().getResourceAsStream("lk/inam/glizmo/reports/stock_report1.jasper");
 
         if (filePath == null) {
             JOptionPane.showMessageDialog(this, "Report file not found!", "Error", JOptionPane.ERROR_MESSAGE);
@@ -229,8 +230,8 @@ public class StockPanel extends javax.swing.JPanel {
         JasperPrint fillReport = JasperFillManager.fillReport(filePath, parameters, connection);
         JasperViewer.viewReport(fillReport, false);
 
-    } catch (Exception e) {
-        e.printStackTrace();
+    } catch (HeadlessException | JRException e) {
+        
         JOptionPane.showMessageDialog(this, "Error generating report:\n" + e.getMessage(),
                 "Report Error", JOptionPane.ERROR_MESSAGE);
     }

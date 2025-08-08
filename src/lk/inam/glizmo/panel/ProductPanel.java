@@ -68,12 +68,14 @@ public class ProductPanel extends javax.swing.JPanel {
                 v.add(rs.getString("product_id"));
                 v.add(rs.getString("product_name"));
                 v.add(rs.getString("description"));
-                v.add(rs.getString("price"));
-                v.add(rs.getString("quantity"));
                 v.add(rs.getString("category_name"));
                 v.add(rs.getString("brand_name"));
                 v.add(rs.getString("model_name"));
-                v.add("product_status");
+                if (rs.getString("product_status").equals("1")) {
+                    v.add("Active");
+                } else {
+                    v.add("Inactive");
+                }
                 dtm.addRow(v);
             }
             DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
@@ -160,11 +162,11 @@ public class ProductPanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "#", "Name", "Description", "Price", "Quantity", "Category", "Brand", "Model", "Action"
+                "#", "Name", "Description", "Category", "Brand", "Model", "Action"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -346,7 +348,7 @@ public class ProductPanel extends javax.swing.JPanel {
     private void productReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_productReportActionPerformed
         try {
 
-            InputStream filePath = getClass().getClassLoader().getResourceAsStream("lk/inam/glizmo/reports/product_report.jasper");
+            InputStream filePath = getClass().getClassLoader().getResourceAsStream("lk/inam/glizmo/reports/product_report2.jasper");
 
             if (filePath == null) {
                 JOptionPane.showMessageDialog(this, "Report file not found!", "Error", JOptionPane.ERROR_MESSAGE);
