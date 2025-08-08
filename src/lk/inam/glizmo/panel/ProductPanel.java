@@ -37,15 +37,8 @@ import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.view.JasperViewer;
 
-/**
- *
- * @author moham
- */
 public class ProductPanel extends javax.swing.JPanel {
 
-    /**
-     * Creates new form ProductPanel
-     */
     public ProductPanel() {
         initComponents();
         init();
