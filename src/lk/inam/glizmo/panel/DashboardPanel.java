@@ -7,6 +7,9 @@ package lk.inam.glizmo.panel;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import connection.MySQL;
 import java.awt.BorderLayout;
+import java.awt.HeadlessException;
+import java.io.InputStream;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.util.Vector;
 import javax.swing.JPanel;
@@ -19,7 +22,12 @@ import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.data.general.DefaultPieDataset;
 import java.sql.SQLException;
+import java.util.HashMap;
 import javax.swing.JOptionPane;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
 import org.jfree.data.category.DefaultCategoryDataset;
 
 /**
@@ -426,20 +434,18 @@ public class DashboardPanel extends javax.swing.JPanel {
         tableHeader.setForeground(new java.awt.Color(3, 4, 94));
         tableHeader.setBackground(new java.awt.Color(173, 232, 244));
         try {
-            ResultSet rs = MySQL.executeSearch("SELECT \n"
-                    + "    product_id,\n"
-                    + "    product_name,\n"
-                    + "    SUM(order_quantity) AS total_quantity_sold,\n"
-                    + "    SUM(order_price * order_quantity) AS total_revenue,\n"
-                    + "    \n"
-                    + "    stock_quantity,\n"
-                    + "    stock_price,\n"
-                    + "    (stock_quantity * stock_price) AS total_stock_value\n"
-                    + "\n"
-                    + "FROM view_order\n"
-                    + "GROUP BY product_id, product_name, stock_quantity, stock_price\n"
-                    + "ORDER BY total_quantity_sold DESC\n"
-                    + "LIMIT 10;");
+            ResultSet rs = MySQL.executeSearch("SELECT \n" +
+"    `product_id`,\n" +
+"    `product_name`,\n" +
+"    SUM(`order_quantity`) AS `total_quantity_sold`,\n" +
+"    SUM(`order_price` * `order_quantity`) AS `total_revenue`\n" +
+"FROM \n" +
+"    `view_order`\n" +
+"GROUP BY \n" +
+"    `product_id`, `product_name`\n" +
+"ORDER BY \n" +
+"    `total_quantity_sold` DESC\n" +
+"LIMIT 10;");
             DefaultTableModel dtm = (DefaultTableModel) topProduct.getModel();
             dtm.setRowCount(0);
             int count = 0;
@@ -449,7 +455,7 @@ public class DashboardPanel extends javax.swing.JPanel {
                 v.add(rs.getString("product_name"));
                 v.add(rs.getString("total_quantity_sold"));
                 v.add(rs.getString("total_revenue"));
-                v.add(rs.getString("stock_quantity"));
+
                 dtm.addRow(v);
             }
             DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
@@ -534,6 +540,8 @@ public class DashboardPanel extends javax.swing.JPanel {
         iconUserCount = new javax.swing.JLabel();
         chart = new javax.swing.JPanel();
         chart1 = new javax.swing.JPanel();
+        topProductReport = new javax.swing.JButton();
+        topUserReport = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Leelawadee UI Semilight", 1, 36)); // NOI18N
         jLabel1.setText("Dashboard");
@@ -569,17 +577,17 @@ public class DashboardPanel extends javax.swing.JPanel {
         topProduct.setFont(new java.awt.Font("Leelawadee UI Semilight", 1, 14)); // NOI18N
         topProduct.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "#", "Name", "Sold Quantity", "Total Amount", "Total Stocks"
+                "#", "Name", "Sold Quantity", "Total Amount"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -867,6 +875,28 @@ public class DashboardPanel extends javax.swing.JPanel {
             .addGap(0, 288, Short.MAX_VALUE)
         );
 
+        topProductReport.setBackground(new java.awt.Color(30, 144, 255));
+        topProductReport.setFont(new java.awt.Font("Leelawadee UI Semilight", 1, 14)); // NOI18N
+        topProductReport.setForeground(new java.awt.Color(255, 255, 255));
+        topProductReport.setText("Generate as a report");
+        topProductReport.setIconTextGap(8);
+        topProductReport.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                topProductReportActionPerformed(evt);
+            }
+        });
+
+        topUserReport.setBackground(new java.awt.Color(30, 144, 255));
+        topUserReport.setFont(new java.awt.Font("Leelawadee UI Semilight", 1, 14)); // NOI18N
+        topUserReport.setForeground(new java.awt.Color(255, 255, 255));
+        topUserReport.setText("Generate as a report");
+        topUserReport.setIconTextGap(8);
+        topUserReport.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                topUserReportActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -906,9 +936,14 @@ public class DashboardPanel extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane2)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel2)
-                            .addComponent(jScrollPane1))
+                            .addComponent(jScrollPane1)
+                            .addComponent(topProductReport, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel2))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(topUserReport, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
@@ -933,21 +968,26 @@ public class DashboardPanel extends javax.swing.JPanel {
                     .addComponent(jPanel9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel10, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(chart1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE)))
-                .addGap(28, 28, 28)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(topUserReport, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)))
+                .addGap(30, 30, 30)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(chart, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
-                .addGap(333, 333, 333))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addGap(7, 7, 7)
+                        .addComponent(topProductReport, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(294, 294, 294))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -963,6 +1003,52 @@ public class DashboardPanel extends javax.swing.JPanel {
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void topProductReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_topProductReportActionPerformed
+
+        try {
+
+            InputStream filePath = getClass().getClassLoader().getResourceAsStream("lk/inam/glizmo/reports/order_top.jasper");
+
+            if (filePath == null) {
+                JOptionPane.showMessageDialog(this, "Report file not found!", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            HashMap<String, Object> parameters = new HashMap<>();
+            Connection connection = MySQL.getConnection();
+
+            JasperPrint fillReport = JasperFillManager.fillReport(filePath, parameters, connection);
+            JasperViewer.viewReport(fillReport, false);
+
+        } catch (HeadlessException | JRException e) {
+            JOptionPane.showMessageDialog(this, "Error generating report:\n" + e.getMessage(),
+                    "Report Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_topProductReportActionPerformed
+
+    private void topUserReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_topUserReportActionPerformed
+        
+        try {
+
+            InputStream filePath = getClass().getClassLoader().getResourceAsStream("lk/inam/glizmo/reports/top_user.jasper");
+
+            if (filePath == null) {
+                JOptionPane.showMessageDialog(this, "Report file not found!", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            HashMap<String, Object> parameters = new HashMap<>();
+            Connection connection = MySQL.getConnection();
+
+            JasperPrint fillReport = JasperFillManager.fillReport(filePath, parameters, connection);
+            JasperViewer.viewReport(fillReport, false);
+
+        } catch (HeadlessException | JRException e) {
+            JOptionPane.showMessageDialog(this, "Error generating report:\n" + e.getMessage(),
+                    "Report Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_topUserReportActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -996,7 +1082,9 @@ public class DashboardPanel extends javax.swing.JPanel {
     private javax.swing.JLabel todayErn;
     private javax.swing.JLabel todaySld;
     private javax.swing.JTable topProduct;
+    private javax.swing.JButton topProductReport;
     private javax.swing.JTable topUser;
+    private javax.swing.JButton topUserReport;
     private javax.swing.JPanel totalErnToday;
     private javax.swing.JPanel totalErnWeek;
     private javax.swing.JLabel totalProduct;
