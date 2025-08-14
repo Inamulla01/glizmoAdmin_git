@@ -29,7 +29,6 @@ import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRTableModelDataSource;
 import net.sf.jasperreports.view.JasperViewer;
-
 /**
  *
  * @author moham
@@ -43,6 +42,7 @@ public class StockPanel extends javax.swing.JPanel {
         initComponents();
         init();
         loadStockTable();
+        deleteBtn.setVisible(false);
 
     }
 
@@ -81,7 +81,7 @@ public class StockPanel extends javax.swing.JPanel {
             centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
             stockTable.setDefaultRenderer(Object.class, centerRenderer);
         } catch (SQLException e) {
-             JOptionPane.showMessageDialog(this, "Database error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Database error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -115,6 +115,7 @@ public class StockPanel extends javax.swing.JPanel {
         stockTable = new javax.swing.JTable();
         jSeparator3 = new javax.swing.JSeparator();
         stockReport = new javax.swing.JButton();
+        deleteBtn = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -144,7 +145,20 @@ public class StockPanel extends javax.swing.JPanel {
             new String [] {
                 "#", "Product Name", "Quantity", "Price", "Date Time", "Status", "Alert"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        stockTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                stockTableMouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(stockTable);
 
         stockReport.setBackground(new java.awt.Color(30, 144, 255));
@@ -158,6 +172,17 @@ public class StockPanel extends javax.swing.JPanel {
             }
         });
 
+        deleteBtn.setBackground(new java.awt.Color(255, 0, 51));
+        deleteBtn.setFont(new java.awt.Font("Leelawadee UI Semilight", 1, 14)); // NOI18N
+        deleteBtn.setForeground(new java.awt.Color(255, 255, 255));
+        deleteBtn.setText("Delete Stock");
+        deleteBtn.setIconTextGap(8);
+        deleteBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -165,19 +190,21 @@ public class StockPanel extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 627, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(31, 31, 31)
                         .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 150, Short.MAX_VALUE)
                         .addComponent(addStock, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jSeparator3))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(stockReport, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(stockReport, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(deleteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 627, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -188,9 +215,11 @@ public class StockPanel extends javax.swing.JPanel {
                     .addComponent(addStock, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(stockReport, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(11, 11, 11)
+                .addGap(5, 5, 5)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(stockReport, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(deleteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 395, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -215,32 +244,74 @@ public class StockPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_addStockActionPerformed
 
     private void stockReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stockReportActionPerformed
- try {
-        InputStream filePath = getClass().getClassLoader().getResourceAsStream("lk/inam/glizmo/reports/stock_report1.jasper");
+        try {
+            InputStream filePath = getClass().getClassLoader().getResourceAsStream("lk/inam/glizmo/reports/stock_report1.jasper");
 
-        if (filePath == null) {
-            JOptionPane.showMessageDialog(this, "Report file not found!", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
+            if (filePath == null) {
+                JOptionPane.showMessageDialog(this, "Report file not found!", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            HashMap<String, Object> parameters = new HashMap<>();
+            Connection connection = MySQL.getConnection();
+
+            JasperPrint fillReport = JasperFillManager.fillReport(filePath, parameters, connection);
+            JasperViewer.viewReport(fillReport, false);
+
+        } catch (HeadlessException | JRException e) {
+
+            JOptionPane.showMessageDialog(this, "Error generating report:\n" + e.getMessage(),
+                    "Report Error", JOptionPane.ERROR_MESSAGE);
         }
 
+    }//GEN-LAST:event_stockReportActionPerformed
+private String selectedIdColum; // stores numeric stock_id as string
 
-        HashMap<String, Object> parameters = new HashMap<>();
-        Connection connection = MySQL.getConnection();
+public String getSelectedIdColum() {
+    return selectedIdColum;
+}
 
-        JasperPrint fillReport = JasperFillManager.fillReport(filePath, parameters, connection);
-        JasperViewer.viewReport(fillReport, false);
-
-    } catch (HeadlessException | JRException e) {
-        
-        JOptionPane.showMessageDialog(this, "Error generating report:\n" + e.getMessage(),
-                "Report Error", JOptionPane.ERROR_MESSAGE);
+// Delete product method
+private synchronized void deleteStock() {
+    String id = getSelectedIdColum();
+    if (id == null || id.isEmpty()) {
+        javax.swing.JOptionPane.showMessageDialog(null, "No Stock selected.");
+        return;
     }
 
-    }//GEN-LAST:event_stockReportActionPerformed
+    try {
+        // Use PreparedStatement for safety
+        String sql = "DELETE FROM stock WHERE stock_id = ?";
+        java.sql.Connection conn = MySQL.getConnection(); 
+        java.sql.PreparedStatement pst = conn.prepareStatement(sql);
+        pst.setInt(1, Integer.parseInt(id));
+        pst.executeUpdate();
+
+        loadStockTable();
+        deleteBtn.setVisible(false);
+
+        javax.swing.JOptionPane.showMessageDialog(null, "Stock deleted successfully.");
+    } catch (HeadlessException | NumberFormatException | SQLException e) {
+        javax.swing.JOptionPane.showMessageDialog(null, "Error deleting Stock: " + e.getMessage());
+    }
+}
+    private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
+        deleteStock();
+    }//GEN-LAST:event_deleteBtnActionPerformed
+
+    private void stockTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_stockTableMouseClicked
+    if (evt.getClickCount() == 2) {
+        int row = stockTable.getSelectedRow();
+        // Assuming column 0 contains stock_id (numeric)
+        selectedIdColum = String.valueOf(stockTable.getValueAt(row, 0));
+        deleteBtn.setVisible(true);
+    }
+    }//GEN-LAST:event_stockTableMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addStock;
+    private javax.swing.JButton deleteBtn;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane3;

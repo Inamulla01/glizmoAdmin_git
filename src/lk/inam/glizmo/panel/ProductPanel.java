@@ -42,11 +42,11 @@ public class ProductPanel extends javax.swing.JPanel {
     public ProductPanel() {
         initComponents();
         init();
-        loadUserTable();
+        loadProductTable();
 
     }
 
-    private void loadUserTable() {
+    private void loadProductTable() {
         JTableHeader tableHeader = productTable.getTableHeader();
         tableHeader.setFont(new java.awt.Font("Nunito ExtraBold", java.awt.Font.BOLD, 16));
         tableHeader.setForeground(new java.awt.Color(3, 4, 94));
@@ -167,6 +167,11 @@ public class ProductPanel extends javax.swing.JPanel {
             }
         });
         productTable.setEnabled(false);
+        productTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                productTableMouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(productTable);
 
         jLabel3.setFont(new java.awt.Font("Leelawadee UI Semilight", 1, 36)); // NOI18N
@@ -360,6 +365,10 @@ public class ProductPanel extends javax.swing.JPanel {
         }
 
     }//GEN-LAST:event_productReportActionPerformed
+
+    private void productTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_productTableMouseClicked
+
+    }//GEN-LAST:event_productTableMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

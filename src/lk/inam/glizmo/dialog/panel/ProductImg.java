@@ -39,11 +39,15 @@ public class ProductImg extends javax.swing.JPanel {
         productImgPanel.setLayout(productImgPanelLayout);
         productImgPanelLayout.setHorizontalGroup(
             productImgPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(imgLable, javax.swing.GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE)
+            .addGroup(productImgPanelLayout.createSequentialGroup()
+                .addComponent(imgLable, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         productImgPanelLayout.setVerticalGroup(
             productImgPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(imgLable, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
+            .addGroup(productImgPanelLayout.createSequentialGroup()
+                .addComponent(imgLable, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 15, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

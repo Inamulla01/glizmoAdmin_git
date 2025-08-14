@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.21.3.final using JasperReports Library version 6.21.3-4a3078d20785ebe464f18037d738d12fc98c13cf  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="dashboard" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="71bdc53b-adfe-4047-9c6b-84c049a108ee">
+	<parameter name="TotalEarningToday" class="java.lang.String"/>
+	<parameter name="TotalEarningThisWeek" class="java.lang.String"/>
+	<parameter name="TotalEarningThisMonth" class="java.lang.String"/>
+	<parameter name="TodaySoldProducts" class="java.lang.String"/>
+	<parameter name="ThisWeekSoldProducts" class="java.lang.String"/>
+	<parameter name="ThisMonthSoldProducts" class="java.lang.String"/>
+	<parameter name="TotalStocks" class="java.lang.String"/>
+	<parameter name="TotalProducts" class="java.lang.String"/>
+	<parameter name="TotalUsers" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="69" splitType="Stretch">
+			<staticText>
+				<reportElement x="80" y="10" width="380" height="49" uuid="4f92ee08-47f2-41a6-817d-1fad9c0636d6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial Black" size="32"/>
+				</textElement>
+				<text><![CDATA[Over View Report]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="453" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="44" width="250" height="30" uuid="d532efb5-6e4b-4c76-991f-1d59e5a93188"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial Rounded MT Bold" size="22" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Earning Today :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="84" width="290" height="30" uuid="0c533229-486d-4d1f-ba7b-6375916eca17"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial Rounded MT Bold" size="22" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Earning This Week :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="124" width="300" height="30" uuid="977f8502-c8df-4141-bb2e-f2e7e3750d0e"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial Rounded MT Bold" size="22" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Earning This Month :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="180" width="250" height="30" uuid="fdbfe827-f60c-404e-8c9b-da4194c7204a"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial Rounded MT Bold" size="22" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Today Sold Products :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="220" width="300" height="30" uuid="c7950297-f152-430a-9ac8-cd6e824155a9"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial Rounded MT Bold" size="22" isBold="true"/>
+				</textElement>
+				<text><![CDATA[This Week Sold Products :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="260" width="310" height="30" uuid="947e8bd1-e063-4bd0-b865-f3eeedc58aa8"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial Rounded MT Bold" size="22" isBold="true"/>
+				</textElement>
+				<text><![CDATA[This Month Sold Products :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="319" width="160" height="30" uuid="b24e46d1-db40-4286-9c31-d63a659c679e"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial Rounded MT Bold" size="22" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Stocks :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="359" width="190" height="30" uuid="14693398-8166-4cc6-bb75-759578e7ce65"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial Rounded MT Bold" size="22" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Products :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="399" width="160" height="30" uuid="e89f4f78-13ef-4773-8aed-71811f8065a6"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial Rounded MT Bold" size="22" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Users :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="250" y="44" width="300" height="30" uuid="9fa14bcc-096e-4282-8e82-e0c10aecc169"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Candara" size="19"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{TotalEarningToday}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="290" y="84" width="260" height="30" uuid="e94404e2-76e4-4828-8202-f36763879cb7"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Candara" size="19"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{TotalEarningThisWeek}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="300" y="124" width="250" height="30" uuid="7e40ac77-0a4c-40c3-b145-716a542143de"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Candara" size="19"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{TotalEarningThisMonth}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="250" y="180" width="300" height="30" uuid="957fec7b-6046-4b2c-9dd1-b8b03e1a749e"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Candara" size="19"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{TodaySoldProducts}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="300" y="220" width="250" height="30" uuid="ddd639c7-edce-4445-8e52-eabaec6de26b"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Candara" size="19"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{ThisWeekSoldProducts}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="310" y="260" width="240" height="30" uuid="33ade173-4396-437e-ac86-5b933b082aa3"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Candara" size="19"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{ThisMonthSoldProducts}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="160" y="320" width="390" height="30" uuid="6d57748b-0d90-4abf-ad4b-365144dbcfb4"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Candara" size="19"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{TotalStocks}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="190" y="360" width="360" height="30" uuid="c661d158-9908-44b1-8502-df838da6889a"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Candara" size="19"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{TotalProducts}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="160" y="399" width="390" height="30" uuid="4f46c820-77dc-4adb-b017-914bff3b84ef"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Candara" size="19"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{TotalUsers}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+</jasperReport>

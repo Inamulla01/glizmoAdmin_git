@@ -28,7 +28,7 @@ public class ProductImgPanel extends javax.swing.JPanel {
      */
     public ProductImgPanel() {
         initComponents();
-        imageLoadingPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 10));
+        imageLoadingPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
     }
 
     /**
@@ -93,7 +93,7 @@ public class ProductImgPanel extends javax.swing.JPanel {
 
     private void controlBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_controlBtnActionPerformed
         JFileChooser chooser = new JFileChooser();
-        chooser.setMultiSelectionEnabled(true); // allow multiple images
+        chooser.setMultiSelectionEnabled(true);
         FileNameExtensionFilter filter = new FileNameExtensionFilter(
                 "Images (.png, .jpeg, .jpg)", "png", "jpeg", "jpg");
         chooser.setFileFilter(filter);

@@ -24,6 +24,7 @@ import org.jfree.data.general.DefaultPieDataset;
 import java.sql.SQLException;
 import java.util.HashMap;
 import javax.swing.JOptionPane;
+import net.sf.jasperreports.engine.JREmptyDataSource;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -53,15 +54,14 @@ public class DashboardPanel extends javax.swing.JPanel {
         totalStock();
         totalProduct();
         totalUser();
-        
-        
+
         MonthlyStockChart stockChartPanel = new MonthlyStockChart();
         chart.setLayout(new BorderLayout());
         chart.removeAll();
         chart.add(stockChartPanel, BorderLayout.CENTER);
         chart.revalidate();
         chart.repaint();
-        
+
         MonthlySalesPieChart chart = new MonthlySalesPieChart();
         chart1.setLayout(new BorderLayout());
         chart1.removeAll();
@@ -86,7 +86,7 @@ public class DashboardPanel extends javax.swing.JPanel {
                     dataset.setValue(getMonthName(month), total);
                 }
             } catch (SQLException e) {
-                            JOptionPane.showMessageDialog(null,
+                JOptionPane.showMessageDialog(null,
                         "Something Want wrong",
                         "Error",
                         JOptionPane.ERROR_MESSAGE);
@@ -159,7 +159,7 @@ public class DashboardPanel extends javax.swing.JPanel {
                 }
 
             } catch (SQLException e) {
-                            JOptionPane.showMessageDialog(null,
+                JOptionPane.showMessageDialog(null,
                         "Something Want wrong",
                         "Error",
                         JOptionPane.ERROR_MESSAGE);
@@ -168,7 +168,7 @@ public class DashboardPanel extends javax.swing.JPanel {
             JFreeChart chart = ChartFactory.createPieChart(
                     "Monthly Delivered Orders",
                     dataset,
-                    true ,
+                    true,
                     true,
                     false
             );
@@ -208,183 +208,183 @@ public class DashboardPanel extends javax.swing.JPanel {
             };
         }
     }
+    private String totalEarningTodayValue;
+    private String totalEarningWeekValue;
+    private String totalEarningMonthValue;
+    private String soldTodayValue;
+    private String soldWeekValue;
+    private String soldMonthValue;
+    private String totalStocksValue;
+    private String totalProductsValue;
+    private String totalUsersValue;
 
     private void loadEarningsToday() {
         try {
-            ResultSet rs = MySQL.executeSearch("SELECT IFNULL(SUM(order_price * order_quantity), 0) AS total_earning_today FROM view_order WHERE DATE(order_date_time) = CURDATE();");
+            ResultSet rs = MySQL.executeSearch(
+                    "SELECT IFNULL(SUM(order_price * order_quantity), 0) AS total_earning_today "
+                    + "FROM view_order WHERE DATE(order_date_time) = CURDATE();"
+            );
 
             if (rs.next()) {
-                String total = rs.getString("total_earning_today");
-                todayErn.setText("Total Earning Today: Rs. " + total + "0");
+                totalEarningTodayValue = rs.getString("total_earning_today");
+                todayErn.setText("Total Earning Today: Rs. " + totalEarningTodayValue + "0");
             } else {
+                totalEarningTodayValue = "0";
                 todayErn.setText("Rs. 00");
             }
-
         } catch (SQLException e) {
-                        JOptionPane.showMessageDialog(null,
-                        "Something Want wrong",
-                        "Error",
-                        JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Something went wrong", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
     private void loadEarningsweek() {
         try {
-            ResultSet rs = MySQL.executeSearch("SELECT IFNULL(SUM(order_price * order_quantity), 0) AS total_earning_week FROM view_order WHERE YEARWEEK(order_date_time, 1) = YEARWEEK(CURDATE(), 1);");
+            ResultSet rs = MySQL.executeSearch(
+                    "SELECT IFNULL(SUM(order_price * order_quantity), 0) AS total_earning_week "
+                    + "FROM view_order WHERE YEARWEEK(order_date_time, 1) = YEARWEEK(CURDATE(), 1);"
+            );
 
             if (rs.next()) {
-                String total = rs.getString("total_earning_week");
-                weekErn.setText("Total Earning This Week: Rs. " + total + "0");
+                totalEarningWeekValue = rs.getString("total_earning_week");
+                weekErn.setText("Total Earning This Week: Rs. " + totalEarningWeekValue + "0");
             } else {
+                totalEarningWeekValue = "0";
                 weekErn.setText("Rs. 00");
             }
-
         } catch (SQLException e) {
-                        JOptionPane.showMessageDialog(null,
-                        "Something Want wrong",
-                        "Error",
-                        JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Something went wrong", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
     private void loadEarningsmonth() {
         try {
-            ResultSet rs = MySQL.executeSearch("SELECT IFNULL(SUM(order_price * order_quantity), 0) AS total_earning_month\n"
-                    + "FROM view_order\n"
-                    + "WHERE MONTH(order_date_time) = MONTH(CURDATE()) AND YEAR(order_date_time) = YEAR(CURDATE());");
+            ResultSet rs = MySQL.executeSearch(
+                    "SELECT IFNULL(SUM(order_price * order_quantity), 0) AS total_earning_month "
+                    + "FROM view_order "
+                    + "WHERE MONTH(order_date_time) = MONTH(CURDATE()) AND YEAR(order_date_time) = YEAR(CURDATE());"
+            );
 
             if (rs.next()) {
-                String total = rs.getString("total_earning_month");
-                monthErn.setText("Total Earning This Month: Rs. " + total + "0");
+                totalEarningMonthValue = rs.getString("total_earning_month");
+                monthErn.setText("Total Earning This Month: Rs. " + totalEarningMonthValue + "0");
             } else {
+                totalEarningMonthValue = "0";
                 monthErn.setText("Rs. 00");
             }
-
         } catch (SQLException e) {
-                        JOptionPane.showMessageDialog(null,
-                        "Something Want wrong",
-                        "Error",
-                        JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Something went wrong", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
     private void todaySoldProduct() {
         try {
-            ResultSet rs = MySQL.executeSearch("SELECT IFNULL(SUM(order_quantity), 0) AS sold_today\n"
-                    + "FROM view_order\n"
-                    + "WHERE DATE(order_date_time) = CURDATE();");
+            ResultSet rs = MySQL.executeSearch(
+                    "SELECT IFNULL(SUM(order_quantity), 0) AS sold_today "
+                    + "FROM view_order WHERE DATE(order_date_time) = CURDATE();"
+            );
 
             if (rs.next()) {
-                String total = rs.getString("sold_today");
-                todaySld.setText("Today Sold Products : " + total + " Products");
+                soldTodayValue = rs.getString("sold_today");
+                todaySld.setText("Today Sold Products : " + soldTodayValue + " Products");
             } else {
+                soldTodayValue = "0";
                 todaySld.setText("0");
             }
-
         } catch (SQLException e) {
-                        JOptionPane.showMessageDialog(null,
-                        "Something Want wrong",
-                        "Error",
-                        JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Something went wrong", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
     private void weekSoldProduct() {
         try {
-            ResultSet rs = MySQL.executeSearch("SELECT IFNULL(SUM(order_quantity), 0) AS sold_week\n"
-                    + "FROM view_order\n"
-                    + "WHERE YEARWEEK(order_date_time, 1) = YEARWEEK(CURDATE(), 1);");
+            ResultSet rs = MySQL.executeSearch(
+                    "SELECT IFNULL(SUM(order_quantity), 0) AS sold_week "
+                    + "FROM view_order WHERE YEARWEEK(order_date_time, 1) = YEARWEEK(CURDATE(), 1);"
+            );
 
             if (rs.next()) {
-                String total = rs.getString("sold_week");
-                weekSld.setText("This Week Sold Products : " + total + " Products");
+                soldWeekValue = rs.getString("sold_week");
+                weekSld.setText("This Week Sold Products : " + soldWeekValue + " Products");
             } else {
+                soldWeekValue = "0";
                 weekSld.setText("0");
             }
-
         } catch (SQLException e) {
-                        JOptionPane.showMessageDialog(null,
-                        "Something Want wrong",
-                        "Error",
-                        JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Something went wrong", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
     private void monthSoldProduct() {
         try {
-            ResultSet rs = MySQL.executeSearch("SELECT IFNULL(SUM(order_quantity), 0) AS sold_month\n"
-                    + "FROM view_order\n"
-                    + "WHERE MONTH(order_date_time) = MONTH(CURDATE()) AND YEAR(order_date_time) = YEAR(CURDATE());");
+            ResultSet rs = MySQL.executeSearch(
+                    "SELECT IFNULL(SUM(order_quantity), 0) AS sold_month "
+                    + "FROM view_order "
+                    + "WHERE MONTH(order_date_time) = MONTH(CURDATE()) AND YEAR(order_date_time) = YEAR(CURDATE());"
+            );
 
             if (rs.next()) {
-                String total = rs.getString("sold_month");
-                monthSld.setText("This Month Sold Products : " + total + " Products");
+                soldMonthValue = rs.getString("sold_month");
+                monthSld.setText("This Month Sold Products : " + soldMonthValue + " Products");
             } else {
+                soldMonthValue = "0";
                 monthSld.setText("0");
             }
-
         } catch (SQLException e) {
-                        JOptionPane.showMessageDialog(null,
-                        "Something Want wrong",
-                        "Error",
-                        JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Something went wrong", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
-    private void totalStock() {
+    void totalStock() {
         try {
-            ResultSet rs = MySQL.executeSearch("SELECT COUNT(*) AS total_stocks FROM stock WHERE status = '1';");
+            ResultSet rs = MySQL.executeSearch(
+                    "SELECT COUNT(*) AS total_stocks FROM stock WHERE status = '1';"
+            );
 
             if (rs.next()) {
-                String total = rs.getString("total_stocks");
-                totalStock.setText("Total Stocks : " + total + " Stockes");
+                totalStocksValue = rs.getString("total_stocks");
+                totalStock.setText("Total Stocks : " + totalStocksValue + " Stockes");
             } else {
+                totalStocksValue = "0";
                 totalStock.setText("0");
             }
-
         } catch (SQLException e) {
-                        JOptionPane.showMessageDialog(null,
-                        "Something Want wrong",
-                        "Error",
-                        JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Something went wrong", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
     private void totalProduct() {
         try {
-            ResultSet rs = MySQL.executeSearch("SELECT COUNT(*) AS total_products FROM products WHERE status = '1';");
+            ResultSet rs = MySQL.executeSearch(
+                    "SELECT COUNT(*) AS total_products FROM products WHERE status = '1';"
+            );
 
             if (rs.next()) {
-                String total = rs.getString("total_products");
-                totalProduct.setText("Total Product : " + total + " Products");
+                totalProductsValue = rs.getString("total_products");
+                totalProduct.setText("Total Product : " + totalProductsValue + " Products");
             } else {
+                totalProductsValue = "0";
                 totalProduct.setText("0");
             }
-
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null,
-                        "Something Want wrong",
-                        "Error",
-                        JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Something went wrong", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
     private void totalUser() {
         try {
-            ResultSet rs = MySQL.executeSearch("SELECT COUNT(*) AS total_users FROM users WHERE status_id = '1';");
+            ResultSet rs = MySQL.executeSearch(
+                    "SELECT COUNT(*) AS total_users FROM users WHERE status_id = '1';"
+            );
 
             if (rs.next()) {
-                String total = rs.getString("total_users");
-                totalUser.setText("Total Users : " + total + " Users");
+                totalUsersValue = rs.getString("total_users");
+                totalUser.setText("Total Users : " + totalUsersValue + " Users");
             } else {
+                totalUsersValue = "0";
                 totalUser.setText("0");
             }
-
         } catch (SQLException e) {
-                        JOptionPane.showMessageDialog(null,
-                        "Something Want wrong",
-                        "Error",
-                        JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Something went wrong", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -421,10 +421,10 @@ public class DashboardPanel extends javax.swing.JPanel {
             centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
             topUser.setDefaultRenderer(Object.class, centerRenderer);
         } catch (SQLException e) {
-                        JOptionPane.showMessageDialog(null,
-                        "Something Want wrong",
-                        "Error",
-                        JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null,
+                    "Something Want wrong",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -434,18 +434,18 @@ public class DashboardPanel extends javax.swing.JPanel {
         tableHeader.setForeground(new java.awt.Color(3, 4, 94));
         tableHeader.setBackground(new java.awt.Color(173, 232, 244));
         try {
-            ResultSet rs = MySQL.executeSearch("SELECT \n" +
-"    `product_id`,\n" +
-"    `product_name`,\n" +
-"    SUM(`order_quantity`) AS `total_quantity_sold`,\n" +
-"    SUM(`order_price` * `order_quantity`) AS `total_revenue`\n" +
-"FROM \n" +
-"    `view_order`\n" +
-"GROUP BY \n" +
-"    `product_id`, `product_name`\n" +
-"ORDER BY \n" +
-"    `total_quantity_sold` DESC\n" +
-"LIMIT 10;");
+            ResultSet rs = MySQL.executeSearch("SELECT \n"
+                    + "    `product_id`,\n"
+                    + "    `product_name`,\n"
+                    + "    SUM(`order_quantity`) AS `total_quantity_sold`,\n"
+                    + "    SUM(`order_price` * `order_quantity`) AS `total_revenue`\n"
+                    + "FROM \n"
+                    + "    `view_order`\n"
+                    + "GROUP BY \n"
+                    + "    `product_id`, `product_name`\n"
+                    + "ORDER BY \n"
+                    + "    `total_quantity_sold` DESC\n"
+                    + "LIMIT 10;");
             DefaultTableModel dtm = (DefaultTableModel) topProduct.getModel();
             dtm.setRowCount(0);
             int count = 0;
@@ -462,10 +462,10 @@ public class DashboardPanel extends javax.swing.JPanel {
             centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
             topProduct.setDefaultRenderer(Object.class, centerRenderer);
         } catch (SQLException e) {
-                        JOptionPane.showMessageDialog(null,
-                        "Something Want wrong",
-                        "Error",
-                        JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null,
+                    "Something Want wrong",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -542,6 +542,7 @@ public class DashboardPanel extends javax.swing.JPanel {
         chart1 = new javax.swing.JPanel();
         topProductReport = new javax.swing.JButton();
         topUserReport = new javax.swing.JButton();
+        overViewReport = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Leelawadee UI Semilight", 1, 36)); // NOI18N
         jLabel1.setText("Dashboard");
@@ -897,6 +898,17 @@ public class DashboardPanel extends javax.swing.JPanel {
             }
         });
 
+        overViewReport.setBackground(new java.awt.Color(30, 144, 255));
+        overViewReport.setFont(new java.awt.Font("Leelawadee UI Semilight", 1, 14)); // NOI18N
+        overViewReport.setForeground(new java.awt.Color(255, 255, 255));
+        overViewReport.setText("Generate as a report");
+        overViewReport.setIconTextGap(8);
+        overViewReport.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                overViewReportActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -945,6 +957,10 @@ public class DashboardPanel extends javax.swing.JPanel {
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addComponent(topUserReport, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addContainerGap())))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(overViewReport, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -968,7 +984,9 @@ public class DashboardPanel extends javax.swing.JPanel {
                     .addComponent(jPanel9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel10, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(overViewReport, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(chart1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -987,7 +1005,7 @@ public class DashboardPanel extends javax.swing.JPanel {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                         .addGap(7, 7, 7)
                         .addComponent(topProductReport, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(294, 294, 294))
+                .addGap(242, 242, 242))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -1028,7 +1046,7 @@ public class DashboardPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_topProductReportActionPerformed
 
     private void topUserReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_topUserReportActionPerformed
-        
+
         try {
 
             InputStream filePath = getClass().getClassLoader().getResourceAsStream("lk/inam/glizmo/reports/top_user.jasper");
@@ -1049,6 +1067,37 @@ public class DashboardPanel extends javax.swing.JPanel {
                     "Report Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_topUserReportActionPerformed
+
+    private void overViewReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_overViewReportActionPerformed
+
+        try {
+            HashMap<String, Object> parameters = new HashMap<>();
+            parameters.put("TotalEarningToday", totalEarningTodayValue);
+            parameters.put("TotalEarningThisWeek", totalEarningWeekValue);
+            parameters.put("TotalEarningThisMonth", totalEarningMonthValue);
+            parameters.put("TodaySoldProducts", soldTodayValue);
+            parameters.put("ThisWeekSoldProducts", soldWeekValue);
+            parameters.put("ThisMonthSoldProducts", soldMonthValue);
+            parameters.put("TotalStocks", totalStocksValue);
+            parameters.put("TotalProducts", totalProductsValue);
+            parameters.put("TotalUsers", totalUsersValue);
+
+            InputStream reportStream = getClass().getResourceAsStream("/lk/inam/glizmo/reports/dashboard.jasper");
+            if (reportStream == null) {
+                JOptionPane.showMessageDialog(this, "Dashboard report template not found!", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            JasperPrint jasperPrint = JasperFillManager.fillReport(reportStream, parameters, new JREmptyDataSource());
+            JasperViewer viewer = new JasperViewer(jasperPrint, false);
+            viewer.setTitle("Dashboard Overview Report");
+            viewer.setVisible(true);
+
+        } catch (JRException e) {
+            JOptionPane.showMessageDialog(this, "Error generating dashboard report: " + e.getMessage(), "Report Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+    }//GEN-LAST:event_overViewReportActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1079,6 +1128,7 @@ public class DashboardPanel extends javax.swing.JPanel {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel monthErn;
     private javax.swing.JLabel monthSld;
+    private javax.swing.JButton overViewReport;
     private javax.swing.JLabel todayErn;
     private javax.swing.JLabel todaySld;
     private javax.swing.JTable topProduct;
